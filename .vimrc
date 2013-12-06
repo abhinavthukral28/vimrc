@@ -68,7 +68,12 @@ Bundle 'jelera/vim-javascript-syntax'
 Bundle 'tpope/vim-markdown'
 Bundle 'voithos/vim-python-syntax'
 Bundle 'kchmck/vim-coffee-script'
-
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "garbas/vim-snipmate"
+Bundle "scrooloose/syntastic"
+" Optional:
+Bundle "honza/vim-snippets"
 " checksyntax config
 let g:checksyntax#auto_mode = 0
 
@@ -85,7 +90,7 @@ inoremap # X<C-H>#
 set ai
 set si
 set nu
-
+execute pathogen#infect()
 " omg folding is the worst
 set nofoldenable
 
@@ -104,7 +109,7 @@ nnoremap <tab> :tabnext<CR>
 
 " always show tab line to avoid annoying resize
 set showtabline=2
-
+set relativenumber
 " searching options
 set incsearch
 set showcmd
@@ -156,6 +161,11 @@ set wildmode=list:longest
 
 " close buffer when tab is closed
 set nohidden
+" snipmate stuff
+let g:snipMate = {}
+let g:snipMate.scope_aliases = {}
+let g:snipMate.scope_aliases['ruby'] = 'ruby,ruby-rails,ruby-1.9'
+let g:snipMate.scope_aliases['html'] = 'html,javascript,javascript-jquery'
 
 " better moving between windows
 map <C-j> <C-W>j
@@ -205,3 +215,8 @@ nnoremap <leader>m :call ToggleMouse()<CR>
 
 " statusline
 set laststatus=2
+autocmd Filetype java set makeprg=javac\ %
+set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
+map <F9> :make<Return>:copen<Return>
+map <F10> :cprevious<Return>
+map <F11> :cnext<Return>
